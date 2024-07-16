@@ -38,23 +38,28 @@ window.onload = function () {
         arToolkitSource.copyElementSizeTo(renderer.domElement);
         if (arToolkitContext.arController !== null) {
             arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);
+            arToolkitContext.arController.canvas.width = window.innerWidth;
+            arToolkitContext.arController.canvas.height = window.innerHeight;
         }
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
     }
 
     const arToolkitContext = new THREEx.ArToolkitContext({
         cameraParametersUrl: 'https://rawcdn.githack.com/AR-js-org/AR.js/master/data/data/camera_para.dat',
         detectionMode: 'mono',
         maxDetectionRate: 30,
-        canvasWidth: 640,
-        canvasHeight: 480,
+        canvasWidth: window.innerWidth,
+        canvasHeight: window.innerHeight,
     });
 
-    arToolkitContext.init(function onCompleted() {  
+    arToolkitContext.init(function onCompleted() {
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
     });
 
     const markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-        type: 'hiro',
+        type: 'pattern',
         patternUrl: 'https://rawcdn.githack.com/AR-js-org/AR.js/master/data/data/patt.hiro',
     });
 
