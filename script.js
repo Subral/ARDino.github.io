@@ -44,14 +44,17 @@ window.onload = function () {
     const arToolkitContext = new THREEx.ArToolkitContext({
         cameraParametersUrl: 'https://rawcdn.githack.com/AR-js-org/AR.js/master/data/data/camera_para.dat',
         detectionMode: 'mono',
+        maxDetectionRate: 30,
+        canvasWidth: 640,
+        canvasHeight: 480,
     });
 
-    arToolkitContext.init(function onCompleted() {
+    arToolkitContext.init(function onCompleted() {  
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
     });
 
     const markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-        type: 'pattern',
+        type: 'hiro',
         patternUrl: 'https://rawcdn.githack.com/AR-js-org/AR.js/master/data/data/patt.hiro',
     });
 
