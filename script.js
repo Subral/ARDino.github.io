@@ -42,8 +42,6 @@ window.onload = function () {
             arToolkitContext.arController.canvas.height = window.innerHeight;
         }
         renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
     }
 
     const arToolkitContext = new THREEx.ArToolkitContext({
@@ -91,7 +89,6 @@ window.onload = function () {
             }
         );
     }
-
 
     function animate() {
         requestAnimationFrame(animate);
